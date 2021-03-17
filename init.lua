@@ -1,4 +1,4 @@
----------  -----------|
+---------  .lua-----------|
 
 
 -- ┌────────────────┐
@@ -6,6 +6,7 @@
 -- └────────────────┘
 
 vim.g.mapleader = '\\'
+print('HeyLo')
 
 
 -- ┌──────────────────────────────┐
@@ -39,7 +40,6 @@ require('plugins')
 require('keybinds')
 
 -- colorscheme
--- require('one_nord_moon').setup()
 vim.cmd('colorscheme blue-moon')
 
 
