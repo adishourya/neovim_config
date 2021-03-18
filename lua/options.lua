@@ -21,7 +21,7 @@ glo.expandtab                     =  false
 glo.smartindent                   =  true
 glo.completeopt                   =  'menuone,noselect'
 glo.hidden                        =  true
-glo.ignorecase                    =  true
+glo.ignorecase                    =  false
 glo.joinspaces                    =  false
 glo.scrolloff                     =  4
 glo.shiftround                    =  true
@@ -45,7 +45,7 @@ glo.autochdir                     =  true
 glo.smarttab                      =  true
 vim.g.python3_host_prog           =  "~/anaconda3/bin/python3.8"
 glo.backup                        = false
-glo.listchars                     = "tab:→\\ ,trail:•,extends:>,precedes:←,nbsp:─"
+glo.listchars                     = "tab:• ,trail:•,extends:>,precedes:←,nbsp:─"
 
 
 -- Window Level
