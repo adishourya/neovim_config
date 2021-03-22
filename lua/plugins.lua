@@ -23,8 +23,9 @@ use {'glacambre/firenvim'}
 use {'kyazdani42/nvim-tree.lua'}
 
 -- indent guidelines
-use{'lukas-reineke/indent-blankline.nvim'}
-use{'Yggdroot/indentLine'}
+use{'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+-- Lua Branch doesn not need this anymore
+-- use{'Yggdroot/indentLine'}
 
 -- Colorscheme
 use{'kyazdani42/blue-moon'}
