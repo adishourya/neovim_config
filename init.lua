@@ -71,3 +71,5 @@ require('plugin_configs/statusline')
 -- Git Signs
 require('plugin_configs/gitsigns')
 
+-- Indent Lines
+require('plugin_configs/indentlines')
