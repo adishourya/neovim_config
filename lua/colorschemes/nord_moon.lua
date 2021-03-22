@@ -192,7 +192,7 @@ local plugin_syntax = {
   black_ind = {fg=black_il},
   grey_ind = {fg=grey_il},
   yellow_ind = {fg=yellow_il},
-  algea_ind ={fg=algea_il},
+  algea_ind = {fg=algea_il},
   aqua_ind = {fg=aqua_il},
 
 

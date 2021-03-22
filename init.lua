@@ -40,8 +40,7 @@ require('plugins')
 require('keybinds')
 
 -- colorscheme
-vim.cmd('colorscheme blue-moon')
-
+vim.cmd('colorscheme nord_moon')
 
 
 
