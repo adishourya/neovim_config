@@ -28,7 +28,7 @@ use{'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
 -- use{'Yggdroot/indentLine'}
 
 -- Colorscheme
-use{'kyazdani42/blue-moon'}
+-- use{'kyazdani42/blue-moon'}
 
 -- Tree Sitter
 use {'nvim-treesitter/nvim-treesitter'}
