@@ -28,7 +28,7 @@ inoremap("'","''<left>")
 inoremap('(','()<left>')
 inoremap('[' ,'[]<left>')
 inoremap('{','{}<left>')
-inoremap('<','<><left>')
+-- inoremap('<','<><left>')
 
 -- Tree
 nnoremap('<F12>','<cmd>NvimTreeToggle<cr>')
@@ -37,7 +37,7 @@ nnoremap('<F12>','<cmd>NvimTreeToggle<cr>')
 -- Splits
 
 -- Resize
-nnoremap('<leader>ev','<cmd> tabedit $MYVIMRC <cr>')
+nnoremap('<leader>ev','<cmd> lua require("plugin_configs/telescope_config").edit_nvim_config()<cr>')
 nnoremap('<C-Up>','<cmd> resize -5 <cr>')
 nnoremap('<C-Down>','<cmd> resize +5 <cr>')
 nnoremap('<C-Left>','<cmd> vertical resize -5 <cr>')
@@ -68,8 +68,8 @@ nnoremap('<leader>9','9gt')
 nnoremap('<C-p>','<cmd>Telescope find_files<cr>')
 nnoremap('<leader>rg','<cmd>Telescope live_grep<cr>')
 nnoremap('<leader>b','<cmd>Telescope buffers<cr>')
-nnoremap('<leader>tc','<cmd>Telescope commands')
-
+nnoremap('<leader>tc','<cmd>Telescope commands<cr>')
+nnoremap('<leader>ts',"<cmd> lua require('plugin_configs/telescope_config').study()<cr>")
 
 
 -- Lsp

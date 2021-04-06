@@ -14,7 +14,7 @@ print('HeyLo')
 -- └──────────────────────────────┘
 
 
--- Using packer as plugin manager cuz paq is too dang slow
+-- Using packer as plugin manager cuz paq is too dang slow{{{
 local fn = vim.fn
 local execute = vim.api.nvim_command
 -- Auto install packer.nvim if not exists
@@ -24,13 +24,13 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 vim.cmd [[packadd packer.nvim]]
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
-
+--}}}
 
 -- ┌────────────┐
 -- │  SETTINGS  │
 -- └────────────┘
 
--- options
+-- options{{{
 require('options')
 
 -- plugins
@@ -41,7 +41,7 @@ require('keybinds')
 
 -- colorscheme
 vim.cmd('colorscheme nord_moon')
-
+--}}}
 
 
 
@@ -50,7 +50,7 @@ vim.cmd('colorscheme nord_moon')
 -- └──────────────────────┘
 
 
----- colorizer
+---- colorizer{{{
 require'colorizer'.setup()
 
 ---- Telescope
@@ -71,4 +71,4 @@ require('plugin_configs/statusline')
 require('plugin_configs/gitsigns')
 
 -- Indent Lines
-require('plugin_configs/indentlines')
+require('plugin_configs/indentlines')--}}}

@@ -36,10 +36,9 @@ local cyan_dark      = '#88c0d0'
 local cyan           = '#8fbcbb'
 local fg             = '#a6accd'
 local fg_light       = '#dbdee9'
-local fg_dark        = "#434c5e"
-local hollow         =  "#4c566a"
-local hollow_lighter =  "#4c566a"
-local white          = '#ffffff'
+local fg_dark        = "#4c566a"
+local hollow_lighter =  "#282c34"
+local white          = '#eceff4'
 -- Porting Colors from different scheme
 --  For Indent Line and shit
 local black_il = "#282c34"
@@ -79,7 +78,7 @@ local editor_syntax = {
   PmenuSel     = { bg = cyan, fg = bg_lighter, gui = 'bold' },
   PmenuSbar    = { bg = grey },
   PmenuThumb   = { bg = fg },
-  Search       = { bg = fg_light , fg = bg },
+  Search       = { bg = fg , fg = bg_darker },
   SpecialKey   = { bg = bg_light },
   SpellBad     = { gui = 'underline', sp = red },
   SpellCap     = { gui = 'underline', sp = yellow },
@@ -189,6 +188,7 @@ local plugin_syntax = {
   GitGutterDelete        = { fg = red },
   GitGutterChangeDelete  = { fg = orange },
 
+  -- For Indent Lines
   black_ind = {fg=black_il},
   grey_ind = {fg=grey_il},
   yellow_ind = {fg=yellow_il},

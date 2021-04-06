@@ -1,3 +1,6 @@
+
+local previewers = require("telescope.previewers")--{{{
+
 require('telescope').setup{
   defaults = {
     vimgrep_arguments = {
@@ -43,9 +46,47 @@ require('telescope').setup{
     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
 
+
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
   }
+}--}}}
+
+
+require('telescope').load_extension('media_files')
+
+require'telescope'.setup {
+  extensions = {
+    media_files = {
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      -- filetypes = {"png", "webp", "jpg", "jpeg"},
+      find_cmd = "rg" -- find command (defaults to `fd`)
+    }
+  },
 }
 
 
+
+local M ={}
+
+
+M.study = function()
+  require('telescope.builtin').find_files(
+  {
+    prompt_title = "Maximum Effort",
+    cwd ="/home/adi/Documents/study",
+    previewer=false,
+  })
+end
+
+M.edit_nvim_config = function()
+  require("telescope.builtin").find_files(
+  {
+    prompt_title = "Edit VIMRC",
+    cwd = "/home/adi/.config/nvim"
+  }
+  )
+end
+
+return M

@@ -1,52 +1,36 @@
 local use = require('packer').use
 return require('packer').startup(function()
-use {"wbthomason/packer.nvim", opt = true}
+  use {"wbthomason/packer.nvim", opt = true} --self
 
---Basic Needs
+  use{'tpope/vim-commentary'} --Man's gotta have some comments
 
---Man's gotta have some comments
-use{'tpope/vim-commentary'}
+  use {'norcalli/nvim-colorizer.lua'}   -- Colors my #ex
 
--- Colors my #ex
-use {'norcalli/nvim-colorizer.lua'}
+  use {'kyazdani42/nvim-web-devicons'}   -- good fonts have icons and my font comes from space
 
--- good fonts have icons and my fonts from space
-use {'kyazdani42/nvim-web-devicons'}
+  use {'yuttie/comfortable-motion.vim'}   -- for buttery smooth buffers
 
--- feels like coconut oil
-use {'yuttie/comfortable-motion.vim'}
+  use {'glacambre/firenvim'}   -- Nvim in Browser. say what ?
 
--- Nvim in Browser. say what ?
-use {'glacambre/firenvim'}
+  use {'kyazdani42/nvim-tree.lua'}   -- Seriously who uses netrw
 
--- File structure
-use {'kyazdani42/nvim-tree.lua'}
+  use{'lukas-reineke/indent-blankline.nvim', branch = 'lua'} -- Best indentline plugin ever
 
--- indent guidelines
-use{'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
--- Lua Branch doesn not need this anymore
--- use{'Yggdroot/indentLine'}
+  -- Tree Sitter
+  use {'nvim-treesitter/nvim-treesitter'} -- Tree Sitter
 
--- Colorscheme
--- use{'kyazdani42/blue-moon'}
 
--- Tree Sitter
-use {'nvim-treesitter/nvim-treesitter'}
+  use {'neovim/nvim-lspconfig'} -- Config for diagnostics and such
+  use {'hrsh7th/nvim-compe'} -- For Completion and such
 
---Lsp
-use {'neovim/nvim-lspconfig'}
-use {'hrsh7th/nvim-compe'}
+  use {'nvim-lua/popup.nvim'} -- New Meta
+  use {'nvim-lua/plenary.nvim'}
+  use {'nvim-telescope/telescope.nvim'}
+  use{'nvim-telescope/telescope-media-files.nvim'}
 
--- Telescope
-use {'nvim-lua/popup.nvim'}
-use {'nvim-lua/plenary.nvim'}
-use {'nvim-telescope/telescope.nvim'}
+  use {'lewis6991/gitsigns.nvim',requires = {'nvim-lua/plenary.nvim'}} -- Do i even need this
 
--- Git Signs
-use {'lewis6991/gitsigns.nvim',requires = {'nvim-lua/plenary.nvim'}}
-
--- Statusline
-use {'datwaft/bubbly.nvim'}
+  use {'datwaft/bubbly.nvim'} -- Bubbly statusline
 
 end)
 
