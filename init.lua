@@ -42,7 +42,11 @@ require('keybinds')
 -- colorscheme
 vim.cmd('colorscheme nord_moon')
 --}}}
-
+--
+--
+--Handy functions{{{
+Funcs = require('funcs')
+--}}}
 
 
 -- ┌──────────────────────┐
