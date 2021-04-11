@@ -1,7 +1,9 @@
--- vim.opts
+-- ┌───────────┐
+-- │ vim.opts  │
+-- └───────────┘
 --
 --{{{
--- remove this when vim.opt got merged
+-- remove this when vim.opt gets merged
 local if_nil = function(a, b)
 	if a == nil then
 		return b
@@ -239,13 +241,18 @@ vim.opt = setmetatable({}, opt_mt)
 
 --}}}
 
-local apply_options = function(opts)
+local apply_options = function(opts)--{{{
 	for k, v in pairs(opts) do
 		vim.opt[k] = v
 	end
 end
+--}}}
 
-local options = {
+-- ┌───────┐
+-- │Options│
+-- └───────┘
+
+local options = {--{{{
 	autochdir = true,
 	autoindent = true,
 
@@ -389,5 +396,6 @@ local options = {
 
 	-- A hack for indentline
 }
-
+--}}}
 apply_options(options)
+
