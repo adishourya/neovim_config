@@ -18,6 +18,7 @@ return require('packer').startup(function()
 
   -- Tree Sitter
   use {'nvim-treesitter/nvim-treesitter'} -- Tree Sitter
+  use {'nvim-treesitter/playground'}     --playground
 
 
   use {'neovim/nvim-lspconfig'} -- Config for diagnostics and such
