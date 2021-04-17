@@ -41,6 +41,9 @@ require('keybinds')
 
 -- colorscheme
 vim.cmd('colorscheme nord_moon')
+
+-- Autocmds !!WIP!!
+-- require('autocommands')
 --}}}
 --
 --
@@ -73,6 +76,16 @@ require('plugin_configs/statusline')
 
 -- Git Signs
 require('plugin_configs/gitsigns')
+
+-- Wiki
+
+vim.g.vimwiki_list = {
+  {
+    path = '/home/adi/Documents/my_notes',
+    syntax = 'markdown',
+    ext = '.md',
+  }
+}
 
 -- Indent Lines
 require('plugin_configs/indentlines')--}}}
