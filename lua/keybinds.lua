@@ -1,4 +1,5 @@
 --
+--Funcs
 -- nnoremap
 local nnoremap = function(key, cmd)
 	local opts = {noremap = true, silent = true}
@@ -43,6 +44,12 @@ nnoremap(
 	'<leader>ev',
 	'<cmd> lua require("plugin_configs/telescope_config").edit_nvim_config()<cr>'
 )
+
+nnoremap(
+	'<leader>ed',
+	'<cmd> lua require("plugin_configs/telescope_config").dotfiles()<cr>'
+)
+
 nnoremap('<C-Up>', '<cmd> resize -5 <cr>')
 nnoremap('<C-Down>', '<cmd> resize +5 <cr>')
 nnoremap('<C-Left>', '<cmd> vertical resize -5 <cr>')
@@ -70,10 +77,6 @@ nnoremap('<C-p>', '<cmd>Telescope find_files<cr>')
 nnoremap('<leader>rg', '<cmd>Telescope live_grep<cr>')
 nnoremap('<leader>b', '<cmd>Telescope buffers<cr>')
 nnoremap('<leader>tc', '<cmd>Telescope commands<cr>')
-nnoremap(
-	'<leader>ts',
-	"<cmd> lua require('plugin_configs/telescope_config').study()<cr>"
-)
 
 -- Lsp
 nnoremap('gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
@@ -94,5 +97,7 @@ nnoremap('<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
 nnoremap('[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
 nnoremap(']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 nnoremap('<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
-nnoremap("<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+
+-- nnoremap("<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+nnoremap("<leader>f", "<cmd> lua Funcs.formatter()<cr>")
 

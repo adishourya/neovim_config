@@ -3,6 +3,7 @@ return require('packer').startup(function()
   use {"wbthomason/packer.nvim", opt = true} --self
 
   use{'tpope/vim-commentary'} --Man's gotta have some comments
+  -- use{'tpope/vim-fugitive'} -- Baiscally use :Git instead of !git
 
   use {'norcalli/nvim-colorizer.lua'}   -- Colors my #ex
 
@@ -10,7 +11,7 @@ return require('packer').startup(function()
 
   use {'yuttie/comfortable-motion.vim'}   -- for buttery smooth buffers
 
-  use {'glacambre/firenvim'}   -- Nvim in Browser. say what ?
+  -- use {'glacambre/firenvim'}   -- Nvim in Browser. say what ?
 
   use {'kyazdani42/nvim-tree.lua'}   -- Seriously who uses netrw
 
@@ -27,11 +28,15 @@ return require('packer').startup(function()
   use {'nvim-lua/popup.nvim'} -- New Meta
   use {'nvim-lua/plenary.nvim'}
   use {'nvim-telescope/telescope.nvim'}
-  use{'nvim-telescope/telescope-media-files.nvim'}
 
   use {'lewis6991/gitsigns.nvim',requires = {'nvim-lua/plenary.nvim'}} -- Do i even need this
 
   use {'datwaft/bubbly.nvim'} -- Bubbly statusline
+
+
+  -- Personal Wiki
+  use{'vimwiki/vimwiki'}
+
 
 end)
 

@@ -1,18 +1,9 @@
 local previewers = require("telescope.previewers")
 
---{{{
 
 require('telescope').setup {
 	defaults = {
-		vimgrep_arguments = {
-			'rg',
-			'--color=never',
-			'--no-heading',
-			'--with-filename',
-			'--line-number',
-			'--column',
-			'--smart-case'
-		},
+		vimgrep_arguments = {'rg', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
 		prompt_position = "bottom",
 		prompt_prefix = "→  ",
 		selection_caret = "⇒  ",
@@ -54,32 +45,14 @@ require('telescope').setup {
 	}
 }
 
---}}}
-
-require('telescope').load_extension('media_files')
-
-require 'telescope'.setup {
-	extensions = {
-		media_files = {
-			-- filetypes whitelist
-			-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-			-- filetypes = {"png", "webp", "jpg", "jpeg"},
-			find_cmd = "rg"
-
-			-- find command (defaults to `fd`)
-		}
-	},
-}
 
 local M = {}
 
-M.study = function()
-	require('telescope.builtin').find_files({
-		prompt_title = "Maximum Effort",
-		cwd = "/home/adi/Documents/study",
-		previewer = false,
-	})
+
+M.dotfiles = function()
+	require("telescope.builtin").find_files({prompt_title = "Edit Dotfiles", cwd = "/home/adi/.config/"})
 end
+
 
 M.edit_nvim_config = function()
 	require("telescope.builtin").find_files({prompt_title = "Edit VIMRC", cwd = "/home/adi/.config/nvim"})
