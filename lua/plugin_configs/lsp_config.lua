@@ -37,7 +37,7 @@ for _, lsp in ipairs(servers) do
   -- nvim_lsp[lsp].setup { on_attach = require'completion'.on_attach }
 end
 
-local sumneko_root_path = "/home/adi/.config/nvim/lang_servers/lua-language-server"
+local sumneko_root_path = "/home/adi/Documents/lang_servers/lua-language-server"
 require'lspconfig'.sumneko_lua.setup{
   cmd = {sumneko_root_path .. "/bin/Linux/lua-language-server", "-E", sumneko_root_path .. "/main.lua"},
   settings = {
