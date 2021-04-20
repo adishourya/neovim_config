@@ -1,7 +1,7 @@
 -- Here you can add the configuration for the plugin
 
 vim.g.bubbly_palette = {
-  background = "#20242b",
+  background = "#1e222a",
   foreground = "#c5cdd9",
   black = "#3b4252",
   red = "#ec7279",
