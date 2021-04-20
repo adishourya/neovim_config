@@ -40,6 +40,7 @@ local fg_dark        = "#4c566a"
 local hollow_lighter =  "#282c34"
 local white          = '#eceff4'
 -- Porting Colors from different scheme
+--
 --  For Indent Line and shit
 local black_il = "#282c34"
 local grey_il = "#969896"
@@ -196,6 +197,17 @@ local plugin_syntax = {
   aqua_ind = {fg=aqua_il},
 
 
+  -- Telescope
+  TelescopeBorder = { fg = cyan_dark },
+
+
+  -- NvimTree
+  NvimTreeNormal = { fg = fg, bg = bg_light },
+  NvimTreeRootFolder = { fg = blue, style = "bold" },
+  NvimTreeGitDirty = { fg = orange },
+  NvimTreeGitNew = { fg = cyan },
+  NvimTreeSpecialFile = { fg = yellow },
+
   diffAdded              = { fg = green },
   diffRemoved            = { fg = heavy_red },
 
@@ -205,10 +217,10 @@ local plugin_syntax = {
   LspDiagnosticsSignHint = {fg=blue},
 
 
-  LspDiagnosticsVirtualTextError = {fg=red},
-  LspDiagnosticsVirtualTextWarning = {fg=yellow},
-  LspDiagnosticsVirtualTextInformation = {fg=blue_light},
-  LspDiagnosticsVirtualTextHint = {fg=blue},
+  LspDiagnosticsVirtualTextError = {bg=grey,fg=red},
+  LspDiagnosticsVirtualTextWarning = {bg=grey,fg=yellow},
+  LspDiagnosticsVirtualTextInformation = {bg=grey,  fg=blue_light},
+  LspDiagnosticsVirtualTextHint = {bg=grey,fg=blue},
 
 
 

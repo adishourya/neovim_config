@@ -275,7 +275,7 @@ local options = {--{{{
 	hlsearch = true,
 
 	-- highlight matching search
-	ignorecase = true,
+	ignorecase = false,
 
 	-- case insensitive on search
 	lazyredraw = true,

@@ -36,7 +36,8 @@ return require('packer').startup(function()
 
   -- Personal Wiki
   use{'vimwiki/vimwiki'}
-
+  -- Gotta take inspiration from this theme
+  use{'folke/tokyonight.nvim'}
 
 end)
 

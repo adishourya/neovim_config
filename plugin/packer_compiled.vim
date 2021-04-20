@@ -97,10 +97,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/adi/.local/share/nvim/site/pack/packer/start/vim-commentary"
   },
-  ["vim-fugitive"] = {
-    loaded = true,
-    path = "/home/adi/.local/share/nvim/site/pack/packer/start/vim-fugitive"
-  },
   vimwiki = {
     loaded = true,
     path = "/home/adi/.local/share/nvim/site/pack/packer/start/vimwiki"

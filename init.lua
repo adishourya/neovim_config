@@ -40,7 +40,9 @@ require('plugins')
 require('keybinds')
 
 -- colorscheme
-vim.cmd('colorscheme nord_moon')
+-- vim.cmd('colorscheme OceanicNext')
+-- vim.cmd('colorscheme nord_moon')
+vim.cmd('colorscheme nordnight')
 
 -- Autocmds !!WIP!!
 -- require('autocommands')

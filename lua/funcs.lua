@@ -19,7 +19,7 @@ end
 F.reindent = function(tabsize)
   if tabsize == nil then
     -- dont know how to give default value
-    -- like in pythhon
+    -- like in python
     tabsize =2
   end
   if vim.bo.filetype == "python" then
