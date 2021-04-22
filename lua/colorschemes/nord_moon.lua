@@ -66,7 +66,7 @@ local editor_syntax = {
   ErrorMsg     = { fg = red, gui = 'bold' },
   VertSplit    = { bg = bg_dark, fg = bg },
   Folded       = { fg = fg_dark, gui = 'italic' },
-  FoldColumn   = { fg = black_il },
+  FoldColumn   = { fg = grey_dark },
   SignColumn   = { fg = black_il },
   IncSearch    = { bg = yellow, fg = bg },
   Substitute   = { bg = blue, fg = bg },
@@ -217,11 +217,10 @@ local plugin_syntax = {
   LspDiagnosticsSignHint = {fg=blue},
 
 
-  LspDiagnosticsVirtualTextError = {bg=grey,fg=red},
-  LspDiagnosticsVirtualTextWarning = {bg=grey,fg=yellow},
-  LspDiagnosticsVirtualTextInformation = {bg=grey,  fg=blue_light},
-  LspDiagnosticsVirtualTextHint = {bg=grey,fg=blue},
-
+LspDiagnosticsVirtualTextError        =  {bg=bg_darker,  fg=red},
+LspDiagnosticsVirtualTextWarning      =  {bg=bg_darker,  fg=yellow},
+LspDiagnosticsVirtualTextInformation  =  {bg=bg_darker,  fg=blue_light},
+LspDiagnosticsVirtualTextHint         =  {bg=bg_darker,  fg=blue},
 
 
   TSError                = {},

@@ -31,13 +31,16 @@ return require('packer').startup(function()
 
   use {'lewis6991/gitsigns.nvim',requires = {'nvim-lua/plenary.nvim'}} -- Do i even need this
 
-  use {'datwaft/bubbly.nvim'} -- Bubbly statusline
+  -- use {'datwaft/bubbly.nvim'} -- Bubbly statusline
+  use { 'glepnir/galaxyline.nvim', branch = 'main', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+  -- bufferline
+  use {'romgrk/barbar.nvim'}
 
 
   -- Personal Wiki
   use{'vimwiki/vimwiki'}
-  -- Gotta take inspiration from this theme
-  use{'folke/tokyonight.nvim'}
+  -- Some other good colorschemes
+  use{'mhartington/oceanic-next'}
 
 end)
 

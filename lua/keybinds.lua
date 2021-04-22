@@ -72,6 +72,20 @@ nnoremap('<leader>7', '7gt')
 nnoremap('<leader>8', '8gt')
 nnoremap('<leader>9', '9gt')
 
+-- Buffers with BarBar
+-- " Goto buffer in position...
+nnoremap( "<A-1>", "<cmd>BufferGoto 1<CR>")
+nnoremap( "<A-2>", "<cmd>BufferGoto 2<CR>")
+nnoremap( "<A-3>", "<cmd>BufferGoto 3<CR>")
+nnoremap( "<A-4>", "<cmd>BufferGoto 4<CR>")
+nnoremap( "<A-5>", "<cmd>BufferGoto 5<CR>")
+nnoremap( "<A-6>", "<cmd>BufferGoto 6<CR>")
+nnoremap( "<A-7>", "<cmd>BufferGoto 7<CR>")
+nnoremap( "<A-8>", "<cmd>BufferGoto 8<CR>")
+nnoremap( "<A-9>", "<cmd>BufferLast<CR>")
+
+nnoremap("<A-f>","<cmd>BufferPick<cr>")
+
 -- Telescope
 nnoremap('<C-p>', '<cmd>Telescope find_files<cr>')
 nnoremap('<leader>rg', '<cmd>Telescope live_grep<cr>')
