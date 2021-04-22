@@ -71,6 +71,10 @@ end
 time("try_loadstring definition", false)
 time("Defining packer_plugins", true)
 _G.packer_plugins = {
+  ["barbar.nvim"] = {
+    loaded = true,
+    path = "/home/adi/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+  },
   ["comfortable-motion.vim"] = {
     loaded = true,
     path = "/home/adi/.local/share/nvim/site/pack/packer/start/comfortable-motion.vim"
