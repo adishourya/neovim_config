@@ -92,7 +92,7 @@ local editor_syntax = {
   Visual       = { bg = hollow_lighter,fg=white,gui='italic' },
   VisualNOS    = { bg = hollow_lighter ,fg=white,gui='italic'},
   WarningMsg   = { fg = yellow, gui = 'italic' },
-  Whitespace   = { bg = bg_dark }, -- TODO: i don't know where this is
+  Whitespace   = { bg = bg_dark },
 
   -- git highlighting
   gitcommitComment        = { fg = fg_dark, gui = 'italic' },
@@ -188,6 +188,12 @@ local plugin_syntax = {
   GitGutterChange        = { fg = yellow },
   GitGutterDelete        = { fg = red },
   GitGutterChangeDelete  = { fg = orange },
+
+  -- GitSigns
+  GitSignsAdd= {fg=yellow}, -- Green is for staging hunks
+  GitSignsChange= {fg=yellow},
+  GitSignsDelete= {fg=red},
+
 
   -- For Indent Lines
   black_ind = {fg=black_il},
