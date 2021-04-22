@@ -2,6 +2,7 @@
 -- Vim Color File
 -- Name:       nord_moon.lua (A Fork of blue-moon)
 -- Maintainer: Aditya Shourya
+-- A Fork of blu-moon
 -- License:    The MIT License (MIT)
 
 local M = {}
@@ -194,6 +195,28 @@ local plugin_syntax = {
   GitSignsChange= {fg=yellow},
   GitSignsDelete= {fg=red},
 
+
+  -- BarBar
+  BufferCurrent        =  {bg=white,fg=bg,style="bold"},
+  BufferCurrentIndex   =  {bg=blue_light,fg=bg,style="bold"},
+  BufferCurrentMod     =  {bg=white,fg=bg,style="bold"},
+  BufferCurrentSign    =  {bg=white,fg=bg,style="bold"},
+  BufferCurrentTarget  =  {bg=white,fg=bg,style="bold"},
+
+  BufferVisible        =  {bg=bg_darker,fg=white},
+  BufferVisibleIndex   =  {bg=bg_darker,fg=white},
+  BufferVisibleMod     =  {bg=bg_darker,fg=white},
+  BufferVisibleSign    =  {bg=bg_darker,fg=white},
+  BufferVisibleTarget  =  {bg=bg_darker,fg=white},
+
+  BufferInactive        =  {bg=bg_darker,fg=white},
+  BufferInactiveIndex   =  {bg=bg_darker,fg=white},
+  BufferInactiveMod     =  {bg=bg_darker,fg=white},
+  BufferInactiveSign    =  {bg=bg_darker,fg=white},
+  BufferInactiveTarget  =  {bg=bg_darker,fg=white},
+
+  BufferTabpages     =  {bg=bg_dark,fg=white},
+  BufferTabpageFill  =  {bg=bg_dark,fg=white},
 
   -- For Indent Lines
   black_ind = {fg=black_il},
