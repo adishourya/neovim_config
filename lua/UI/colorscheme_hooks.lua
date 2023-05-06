@@ -13,6 +13,7 @@ local locate = function( table, value )
 	return false
 end
 
+
 local fix_borders = function ()
 	if locate(weird_borders_schemes,vim.g.colors_name) then
 		vim.cmd("highlight! link FloatBorder Normal")

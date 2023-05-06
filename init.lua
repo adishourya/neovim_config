@@ -1,11 +1,10 @@
+vim.o.termguicolors = true
+
 -- [[ Plugin List ]]
 require("plugin_list")
 
 -- [[ UI ]]
 require("UI")
-
--- [[This makes neovim api stuff amazing]]
-require('neodev').setup()
 
 -- [[ Settings ]]
 require("settings")

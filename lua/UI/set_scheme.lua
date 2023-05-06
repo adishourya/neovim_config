@@ -1,1 +1,1 @@
-vim.cmd[[colorscheme vscode_dark]]
+vim.cmd[[colorscheme ashes]]

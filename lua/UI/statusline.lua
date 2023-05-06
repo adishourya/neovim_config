@@ -45,9 +45,9 @@ end
 ---@diagnostic disable-next-line: unused-local
 local word_count = function()
 	if vim.fn.wordcount().visual_words ~= nil then
-		return "Selected Words"..vim.fn.wordcount().visual_words
+		return "Words:"..vim.fn.wordcount().visual_words
 	else
-		return "Total Words "..vim.fn.wordcount().words
+		return "Words: "..vim.fn.wordcount().words
 	end
 end
 
@@ -106,12 +106,14 @@ vim.opt.statusline = "%!v:lua.status_line()"
 -- cursorline only when insert mode and change highlighting of statusline
 autocmd('InsertEnter',{
 	callback = function()
-		vim.cmd("highlight! link Statusline Cursorline")
+		vim.wo.cursorline = true
+		vim.cmd("highlight! link Statusline Search")
 	end,
 })
 
 autocmd('InsertLeave',{
 	callback = function()
+		vim.wo.cursorline = false
 		vim.cmd("highlight! link Statusline StatusLine")
 	end,
 })

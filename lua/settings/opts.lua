@@ -41,10 +41,6 @@ vim.o.mouse = ''
 --Decrease update time
 vim.o.updatetime = 50
 
---Set colorscheme
--- First thing in init.lua
-vim.o.termguicolors = true
-
 -- 4 character wide tab for indentation
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -67,16 +63,8 @@ vim.opt.wrapscan = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.wo.cursorline = true
+vim.wo.cursorline = false
 vim.wo.signcolumn = "yes"
--- cursorline only for the active buffer
-vim.cmd([[
-  augroup cursorline
-  autocmd!
-  autocmd WinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-  augroup END
-]])
 
 vim.wo.scrolloff = 1
 vim.wo.sidescrolloff = 1
@@ -94,10 +82,8 @@ vim.opt.listchars = 'tab:→ ,trail:•,extends:»,precedes:«'
 vim.opt.updatetime = 50
 -- Don't pass messages to |ins-completion-menu|.
 vim.opt.shortmess:append("c")
+-- vim.opt.shortmess:append("F")
 
-
--- copy and paste with OS clipboard
-vim.opt.clipboard = 'unnamedplus'
 
 -- Error formate
 vim.bo.errorformat = [[

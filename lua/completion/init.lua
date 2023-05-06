@@ -41,17 +41,12 @@ cmp.setup({
 		expand = function(args) luasnip.lsp_expand(args.body) end,
 	},
 	mapping = {
+		-- In Insert mode
 		-- return: completes completion if option selected otherwise normal return behaviour
 		-- control + space: trigger completion menu
 		-- control + e: close completion menu
-		-- control + j: if cmp visible then select next completion choice otherwise jump to next
-		--              available Luasnip or Neogen jump nodes
-		-- control + k: if cmp visible then select previous completion choice otherwise jump to prev
-		--              available Luasnip or Neogen jump nodes
 		-- control + f: scroll docs down or revolve positively through Luasnip choice nodes
 		-- control + d: scroll docs up or revolve negatively through Luasnip choice nodes
-		-- tab: command mode only; select next completion choice
-		-- shift + tab: command mode only; select prev completion choice
 
 		-- open completion menu
 		["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),

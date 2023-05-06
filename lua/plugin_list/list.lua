@@ -1,5 +1,6 @@
 local packages = {
 
+	-- Change/delete something around any braces
 	{"tpope/vim-surround"},
 
 	-- Detect tabstop and shiftwidth automatically
@@ -18,7 +19,8 @@ local packages = {
 	{ 'echasnovski/mini.animate', version = false,
 		config = function ()
 			require("mini.animate").setup()
-		end},
+		end
+	},
 
 	{
 		"windwp/nvim-autopairs",
@@ -173,7 +175,7 @@ local packages = {
 
 	-- colorschemes (keep them sep. They can have config funcs)
 	-- see colors
-	{ 'norcalli/nvim-colorizer.lua', cmd = "ColorizerToggle",
+	{ 'norcalli/nvim-colorizer.lua',
 		config = function() require 'colorizer'.setup() end
 	},
 

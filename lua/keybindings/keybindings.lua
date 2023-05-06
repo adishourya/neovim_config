@@ -5,15 +5,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Keep the cursor @ correct indent on empty lines
-vim.keymap.set("x", "i", function()
-if #vim.fn.getline(".") == 0 then
-		return [["_cc]]
-else
-		return "i"
-end
-end, { expr = true })
-
 ------------ Basic Keymaps-------------
 --Paste with respect
 vim.api.nvim_set_keymap('n', 'p', ']p', { noremap = true })
