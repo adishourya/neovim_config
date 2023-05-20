@@ -18,10 +18,10 @@ if hop_ok then
 	end, {remap=true})
 
 	-- Across lines
-	vim.keymap.set('', 's', function()
+	vim.keymap.set('', 'm', function()
 		hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
 	end, {remap=true})
-	vim.keymap.set('', 'S', function()
+	vim.keymap.set('', 'M', function()
 		hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
 	end, {remap=true})
 end

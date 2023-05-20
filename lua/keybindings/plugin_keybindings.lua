@@ -7,8 +7,7 @@ vim.keymap.set('n','\\ed',":Telescope find_files cwd=~/.config <cr>")
 vim.keymap.set('n','<Leader>cd',":cd %:p:h<CR> :lua vim.notify('changed Dir')<cr>")
 
 -- Put it in a box
-vim.keymap.set('n', '\\-', '<cmd>.!toilet -f term -F border <cr> <cmd>Commentary<cr> jVj:Commentary<cr>',{noremap=true})
-vim.keymap.set('v', '\\-', '<cmd>.!toilet -f term -F border <cr> <cmd>Commentary<cr> jVj:Commentary<cr>',{noremap=true})
+vim.keymap.set({'n','v'}, '\\-', '<cmd>.!toilet -f term -F border <cr> ',{noremap=true})
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>rf', ':Telescope oldfiles<CR>', { noremap = true })
@@ -17,7 +16,7 @@ vim.keymap.set('n', '<leader>b', ':Telescope buffers<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>km', ':Telescope keymaps <CR>', { noremap = true })
 
 -- Change word
-vim.keymap.set('n', '<Leader><F2>', ':%s/\\<<C-r><C-w>\\>//g<Left><Left>', { noremap = true })
+vim.keymap.set('n', '\\rn', ':%s/\\<<C-r><C-w>\\>//g<Left><Left>', { noremap = true })
 
 -- git signs
 vim.keymap.set('n',"\\gs",':Gitsigns toggle_signs <CR>')
@@ -41,5 +40,5 @@ vim.keymap.set('n', '<leader>td', ':Gitsigns toggle_deleted<CR>', { noremap = tr
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })

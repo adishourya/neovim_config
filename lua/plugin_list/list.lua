@@ -29,7 +29,7 @@ local packages = {
 		after = "nvim-cmp",
 		config = function() require("nvim-autopairs").setup({}) end,
 	},
-	--
+
 	{ -- LSP Configuration & Plugins
 		'neovim/nvim-lspconfig',
 		dependencies = {
@@ -129,8 +129,6 @@ local packages = {
 	-- requirements installed.
 	{
 		'nvim-telescope/telescope-fzf-native.nvim',
-		-- NOTE: If you are having trouble with this installation,
-		--       refer to the README for telescope-fzf-native for more instructions.
 		lazy = false,
 		build = 'make',
 		cond = function()
@@ -147,7 +145,8 @@ local packages = {
 		config = function()
 			require("telescope").setup { extensions = { file_browser = { hijack_netrw = true, }, }, }
 			require("telescope").load_extension "file_browser"
-		end },
+		end
+	},
 
 	{ -- Highlight, edit, and navigate code
 		'nvim-treesitter/nvim-treesitter',
