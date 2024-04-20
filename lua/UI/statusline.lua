@@ -163,7 +163,7 @@ local blink = function (duration,hlgroup)
 end
 
 
--- Highlight statusline when yanked or deleted
+-- -- Highlight statusline when yanked or deleted
 autocmd("TextYankPost",{
 	callback = function()
 		vim.highlight.on_yank({ higroup = "Visual", timeout = 050 })

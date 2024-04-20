@@ -1,1 +1,1 @@
-vim.cmd[[colorscheme chocolate]]
+vim.cmd[[colorscheme penumbra_light]]
