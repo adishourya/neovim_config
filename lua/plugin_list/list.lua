@@ -56,6 +56,7 @@ local packages = {
 		dependencies = {
 			'L3MON4D3/LuaSnip',
 			'saadparwaiz1/cmp_luasnip',
+			'jmbuhr/otter.nvim',
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-nvim-lua',
 			"hrsh7th/cmp-buffer",
@@ -91,9 +92,13 @@ local packages = {
 	},
 
 
-	{ 'echasnovski/mini.indentscope', version = false, config = function ()
-		require('mini.indentscope').setup()
-	end },
+	{
+		'echasnovski/mini.indentscope',
+		version = false,
+		config = function()
+			require('mini.indentscope').setup()
+		end
+	},
 
 
 
@@ -141,9 +146,9 @@ local packages = {
 
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
-			dependencies = {
-				'nvim-treesitter/nvim-treesitter-textobjects',
-			},
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter-textobjects',
+		},
 		config = function()
 			require("telescope").setup { extensions = { file_browser = { hijack_netrw = true, }, }, }
 			require("telescope").load_extension "file_browser"
@@ -266,6 +271,16 @@ local packages = {
 		},
 		version = "1.1.0", -- or comment out for latest
 	},
+	{
+		"GCBallesteros/jupytext.nvim",
+		config = function()
+			require("jupytext").setup({
+				style = "markdown",
+				output_extension = "md",
+				force_ft = "markdown",
+			})
+		end,
+	}
 
 }
 

@@ -108,6 +108,7 @@ cmp.setup({
 		end, { "i", "s" }),
 	},
 	sources = {
+		{name = "otter"},
 		{ name = "luasnip", priority = 4 },
 		{ name = "path", priority = 3 },
 		{ name = "nvim_lsp", priority = 3 },
