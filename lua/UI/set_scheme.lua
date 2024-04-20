@@ -1,1 +1,1 @@
-vim.cmd[[colorscheme ashes]]
+vim.cmd[[colorscheme chocolate]]

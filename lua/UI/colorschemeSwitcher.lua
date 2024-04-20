@@ -99,6 +99,7 @@ local escape = function(prompt_bufnr)
 	vim.cmd(cmd)
 	actions.close(prompt_bufnr)
 	ExportColorsKitty()
+	
 end
 
 local enter = function(prompt_bufnr)
@@ -114,13 +115,14 @@ local enter = function(prompt_bufnr)
 	-- return back to normal mode
 	vim.api.nvim_input("<esc>")
 	-- Turn On if you're using TMUX.
-	-- ExportTmux()
+	ExportTmux()
 end
 
 local preview_selection = function (selected)
 	local cmd = "colorscheme " .. selected
 	vim.cmd(cmd)
 	ExportColorsKitty()
+	ExportTmux()
 end
 
 local preview_next = function(prompt_bufnr)
@@ -129,6 +131,7 @@ local preview_next = function(prompt_bufnr)
 	local cmd = "colorscheme " .. selected[1]
 	vim.cmd(cmd)
 	ExportColorsKitty()
+	ExportTmux()
 end
 
 local preview_prev = function(prompt_bufnr)
@@ -137,6 +140,7 @@ local preview_prev = function(prompt_bufnr)
 	local cmd = "colorscheme " .. selected[1]
 	vim.cmd(cmd)
 	ExportColorsKitty()
+	ExportTmux()
 end
 
 
@@ -159,7 +163,9 @@ local switcherOpts = {
 		map("i", "<CR>", enter)
 		map("i", "<ESC>", escape)
 		map("i", "<C-n>", preview_next)
+		map("i", "<Down>", preview_next)
 		map("i", "<C-p>", preview_prev)
+		map("i", "<Up>", preview_prev)
 		return true
 	end
 }
