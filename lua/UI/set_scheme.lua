@@ -1,1 +1,1 @@
-vim.cmd[[colorscheme penumbra_light]]
+vim.cmd[[colorscheme ashes]]
