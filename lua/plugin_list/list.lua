@@ -9,11 +9,9 @@ local packages = {
 
 	-- UI related plugins
 	{
-		'phaazon/hop.nvim',
-		branch = 'v2', -- optional but strongly recommended
-		config = function()
-			require 'hop'.setup {}
-		end
+	'smoka7/hop.nvim',
+	version = "*",
+	opts = { keys = 'etovxqpdygfblzhckisuran' }
 	},
 
 	{
