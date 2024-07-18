@@ -41,7 +41,7 @@ vim.o.mouse = ''
 --Decrease update time
 vim.o.updatetime = 50
 
--- 4 character wide tab for indentation
+-- 2 character wide tab for indentation
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
@@ -76,8 +76,9 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 -- whitespace characters
-vim.wo.list = true
-vim.opt.listchars = 'tab:→ ,trail:•,extends:»,precedes:«'
+-- comment this out "indent line does not work with this!"
+-- vim.wo.list = true
+-- vim.opt.listchars = 'tab:→ ,trail:•,extends:»,precedes:«'
 
 vim.opt.updatetime = 50
 -- Don't pass messages to |ins-completion-menu|.
@@ -99,8 +100,8 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 -- same for diagnostics
--- local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- No Signs
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+-- local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- No Signs
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

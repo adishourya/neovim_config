@@ -4,7 +4,8 @@ local packages = {
 	{ "tpope/vim-surround" },
 
 	-- Detect tabstop and shiftwidth automatically
-	{ 'tpope/vim-sleuth' },
+	-- it has messed up once .. last straw
+	-- { 'tpope/vim-sleuth' },
 
 
 	-- UI related plugins
@@ -14,6 +15,22 @@ local packages = {
 	opts = { keys = 'etovxqpdygfblzhckisuran' }
 	},
 
+	{
+		"OXY2DEV/markview.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons"
+		},
+	},
+
+	-- {
+	-- 	'echasnovski/mini.statusline',
+	-- 	version = false,
+	-- 	config = function()
+	-- 		require("mini.statusline").setup()
+	-- 	end
+	-- },
+	--
 	{
 		'echasnovski/mini.animate',
 		version = false,
@@ -39,6 +56,26 @@ local packages = {
 			'folke/neodev.nvim',
 		},
 	},
+
+	{
+		"hedyhli/outline.nvim",
+		lazy = true,
+		cmd = { "Outline", "OutlineOpen" },
+		keys = { -- Example mapping to toggle outline
+			{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+		},
+		config = function()
+			-- Example mapping to toggle outline
+			vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>",
+				{ desc = "Toggle Outline" })
+
+		require("outline").setup ({
+			outline_window = {
+				position = "left",
+				},
+		})
+	end,
+},
 
 	{
 		"ray-x/lsp_signature.nvim",
@@ -72,6 +109,26 @@ local packages = {
 		config = function() require("neogen").setup({}) end,
 	},
 
+	{
+	'SuperBo/fugit2.nvim',
+	opts = {
+		width = 70,
+	},
+	dependencies = {
+		'MunifTanjim/nui.nvim',
+		'nvim-tree/nvim-web-devicons',
+		'nvim-lua/plenary.nvim',
+		{
+			'chrisgrieser/nvim-tinygit', -- optional: for Github PR view
+			dependencies = { 'stevearc/dressing.nvim' }
+		},
+	},
+	cmd = { 'Fugit2', 'Fugit2Diff', 'Fugit2Graph' },
+	keys = {
+		{ '<leader>F', mode = 'n', '<cmd>Fugit2<cr>' }
+	}
+	},
+
 	{ -- Adds git releated signs to the gutter, as well as utilities for managing changes
 		'lewis6991/gitsigns.nvim',
 		opts = {
@@ -89,25 +146,31 @@ local packages = {
 		end
 	},
 
+	-- { 'stevearc/oil.nvim',
+	-- opts = {},
+	-- -- Optional dependencies
+	-- dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- },
 
-	{
-		'echasnovski/mini.indentscope',
-		version = false,
-		config = function()
-			require('mini.indentscope').setup()
-		end
-	},
+	{ 'echasnovski/mini.files', version = false,
+		config = function ()
+			require('mini.files').setup()
+		end},
 
+	-- {
+	-- 	'echasnovski/mini.indentscope',
+	-- 	version = false,
+	-- 	config = function()
+	-- 		require('mini.indentscope').setup()
+	-- 	end
+	-- },
 
+	-- { "lukas-reineke/indent-blankline.nvim",version = "2.0", opts = {}},
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {},
+		config = function ()
+			require("ibl").setup()
+		end},
 
-	-- "gc" to comment visual regions/lines
-	{
-		'echasnovski/mini.comment',
-		version = false,
-		config = function()
-			require("mini.comment").setup()
-		end
-	},
 
 	-- Fuzzy Finder (files, lsp, etc)
 	{
@@ -119,7 +182,7 @@ local packages = {
 			require('telescope').setup {
 				defaults = require('telescope.themes').get_ivy {
 					selection_caret = "->  ",
-					layout_config = { height = 0.45 },
+					layout_config = { height = 0.5 },
 				},
 			}
 		end
@@ -139,19 +202,9 @@ local packages = {
 			pcall(require('telescope').load_extension, 'fzf')
 		end
 	},
-
+	-- This is great but we will let mini.files take over this
 	{ 'tpope/vim-vinegar', event = "VeryLazy" },
 
-	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		dependencies = {
-			'nvim-treesitter/nvim-treesitter-textobjects',
-		},
-		config = function()
-			require("telescope").setup { extensions = { file_browser = { hijack_netrw = true, }, }, }
-			require("telescope").load_extension "file_browser"
-		end
-	},
 
 	-- { -- Highlight, edit, and navigate code
 	-- 	'nvim-treesitter/nvim-treesitter',
@@ -179,6 +232,14 @@ local packages = {
 			})
 		end,
 	},
+
+	-- sticky header
+	{"nvim-treesitter/nvim-treesitter-context",
+	config = function ()
+		require("treesitter-context").setup(
+				{max_lines = 2,}
+			)
+	end},
 
 	{
 		'rcarriga/nvim-notify',
@@ -216,46 +277,6 @@ local packages = {
 	},
 
 	-- Configuring Notebook
-	{
-		"vhyrro/luarocks.nvim",
-		priority = 1001, -- this plugin needs to run before anything else
-		opts = {
-			rocks = { "magick" },
-		},
-	},
-	{
-		"benlubas/molten-nvim",
-		dependencies = { "3rd/image.nvim" },
-		build = ":UpdateRemotePlugins",
-		init = function()
-			vim.g.molten_image_provider = "image.nvim"
-			vim.g.molten_use_border_highlights = true
-		end,
-	},
-	{
-		"3rd/image.nvim",
-		opts = {
-			backend = "kitty",
-			integrations = {},
-			max_width = 100,
-			max_height = 12,
-			max_height_window_percentage = math.huge,
-			max_width_window_percentage = math.huge,
-			window_overlap_clear_enabled = true,
-			window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-		},
-		version = "1.1.0", -- or comment out for latest
-	},
-	{
-		"GCBallesteros/jupytext.nvim",
-		config = function()
-			require("jupytext").setup({
-				style = "markdown",
-				output_extension = "md",
-				force_ft = "markdown",
-			})
-		end,
-	},
 }
 
 return packages

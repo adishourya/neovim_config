@@ -29,7 +29,9 @@ local preinstalled = {
 	"blue", "darkblue", "delek", "desert", "elflord", "quiet",
 	"evening", "industry", "koehler", "morning", "murphy",
 	"pablo", "peachpuff", "ron", "shine", "slate",
-	"torte", "zellner", "habamax", "lunaperche", "default"
+	"torte", "zellner", "habamax", "lunaperche",
+	-- "default",
+	-- like to keep default uncommented here.. its too good since > 0.10
 }
 -- remove preinstalled colorschemes from the installed list
 local array_sub = function(t1, t2)

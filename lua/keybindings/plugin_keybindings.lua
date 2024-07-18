@@ -6,7 +6,9 @@ vim.keymap.set('n','\\ed',":Telescope find_files cwd=~/.config <cr>")
 -- Autochdir breaks many plugins and is not really a good habbit
 vim.keymap.set('n','<Leader>cd',":cd %:p:h<CR> :lua vim.notify('changed Dir')<cr>")
 
--- Put it in a box
+-- ┌───────────────┐
+-- │Put it in a box│
+-- └───────────────┘
 vim.keymap.set({'n','v'}, '\\-', '<cmd>.!toilet -f term -F border <cr> ',{noremap=true})
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })

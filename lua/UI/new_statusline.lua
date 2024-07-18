@@ -31,7 +31,6 @@ local function mode()
 	return string.format(" %s ", modes[current_mode]):upper()
 end
 
-
 local function git_branch()
 	local branch = vim.fn.system("git branch --show-current 2> /dev/null")
 	if branch ~= ""  then
@@ -40,7 +39,6 @@ local function git_branch()
 		return "! "
 	end
 end
-
 
 ---@diagnostic disable-next-line: unused-local
 local word_count = function()
@@ -101,6 +99,12 @@ function status_line()
 end
 vim.opt.statusline = "%!v:lua.status_line()"
 
+-- Function to set highlight for mode dynamically
+local function set_mode_highlight()
+	local statusline_fg = vim.api.nvim_get_hl_by_name('StatusLine', true).foreground
+	local statusline_bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background
+	vim.cmd(string.format("highlight ModeHighlight guifg=%s guibg=%s", statusline_fg, statusline_bg))
+end
 
 -- cursorline only when insert mode and change highlighting of statusline
 autocmd('InsertEnter',{
@@ -133,7 +137,6 @@ autocmd('ModeChanged', {
 	end
 })
 
-
 -- Blink on text yank
 
 -- Highlighting statusline is intuitive for me
@@ -161,8 +164,7 @@ local blink = function (duration,hlgroup)
 	end))
 end
 
-
--- -- Highlight statusline when yanked or deleted
+-- Highlight statusline when yanked or deleted
 autocmd("TextYankPost",{
 	callback = function()
 		vim.highlight.on_yank({ higroup = "Visual", timeout = 050 })
@@ -171,3 +173,5 @@ autocmd("TextYankPost",{
 	pattern = "*"
 })
 
+-- Set the mode highlight based on current colorscheme
+set_mode_highlight()
