@@ -54,8 +54,24 @@ cmp.setup({
 		-- Abort Completion
 		["<c-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
 
+		-- hope this works!
+		
+
 		-- Next in menu
 		["<c-n>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif neogen.jumpable() then
+				neogen.jump_next()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+
+
+		["<tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 			elseif luasnip.expand_or_jumpable() then
@@ -80,8 +96,22 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 
+		["<S-tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+			elseif luasnip.choice_active() then
+				luasnip.change_choice(-1)
+			elseif neogen.jumpable(-1) then
+				neogen.jump_prev()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+
 		-- Accept the selected completion
 		['<c-y>'] = cmp.mapping.confirm({ select = true }),
+		-- not very neovim-y but has to be done
+		['<cr>'] = cmp.mapping.confirm({ select = true }),
 
 		-- Scroll up DOc that pops
 		["<c-f>"] = cmp.mapping(function(fallback)

@@ -1,1 +1,1 @@
-vim.cmd[[colorscheme threads]]
+vim.cmd[[colorscheme wombat]]

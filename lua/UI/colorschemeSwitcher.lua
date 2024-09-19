@@ -78,6 +78,37 @@ function ExportColorsKitty()
 	vim.fn.jobstart(exec_run)
 end
 
+
+function ExportColorsAlacritty()
+	local fn = vim.fn
+	local filename = os.getenv("HOME") .. "/.config/alacritty/nvim_export.toml"
+	local file = io.open(filename, "w")
+	---@diagnostic disable-next-line: param-type-mismatch
+	io.output(file)
+	io.write("# Alacritty color scheme exported from Neovim\n\n")
+	io.write("[colors]\n")
+	io.write("[colors.primary]\n")
+	local fg = fn.synIDattr(fn.hlID("Normal"), "fg")
+	local bg = fn.synIDattr(fn.hlID("Normal"), "bg")
+	io.write("foreground = '" .. fg .. "'\n")
+	io.write("background = '" .. bg .. "'\n")
+	io.write("\n[colors.selection]\n")
+	io.write("foreground = '" .. bg .. "'\n")
+	io.write("background = '" .. fg .. "'\n")
+	io.write("\n[colors.cursor]\n")
+	io.write("text = '" .. bg .. "'\n")
+	io.write("cursor = '" .. fg .. "'\n")
+	io.close(file)
+	-- 	-- Trigger Alacritty hot reload by sending SIGUSR1 to Alacritty process
+	-- local alacritty_pid = fn.system("pgrep alacritty")
+	-- if alacritty_pid ~= "" then
+	-- 	fn.system("kill -s USR1 " .. alacritty_pid)
+	-- 	print("Alacritty configuration reloaded.")
+	-- else
+	-- 	print("Alacritty process not found.")
+	-- end
+end
+
 function ExportTmux()
 	local fn = vim.fn
 	local filename = os.getenv("HOME") .. "/.tmux_statuline_colors.conf"
@@ -100,7 +131,8 @@ local escape = function(prompt_bufnr)
 	local cmd = "colorscheme " .. CURRENT_SCHEME
 	vim.cmd(cmd)
 	actions.close(prompt_bufnr)
-	ExportColorsKitty()
+	-- ExportColorsKitty()
+	ExportColorsAlacritty()
 	
 end
 
@@ -113,7 +145,8 @@ local enter = function(prompt_bufnr)
 	local exec_run = string.format("echo 'vim.cmd[[colorscheme %s]]' > %s",selected[1],csPath)
 	vim.fn.jobstart(exec_run)
 	vim.notify("Colorscheme Change From "..CURRENT_SCHEME.." to "..selected[1])
-	ExportColorsKitty()
+	-- ExportColorsKitty()
+	ExportColorsAlacritty()
 	-- return back to normal mode
 	vim.api.nvim_input("<esc>")
 	-- Turn On if you're using TMUX.
@@ -123,7 +156,8 @@ end
 local preview_selection = function (selected)
 	local cmd = "colorscheme " .. selected
 	vim.cmd(cmd)
-	ExportColorsKitty()
+	-- ExportColorsKitty()
+	ExportColorsAlacritty()
 	ExportTmux()
 end
 
@@ -132,7 +166,8 @@ local preview_next = function(prompt_bufnr)
 	local selected = actions_state.get_selected_entry()
 	local cmd = "colorscheme " .. selected[1]
 	vim.cmd(cmd)
-	ExportColorsKitty()
+	-- ExportColorsKitty()
+	ExportColorsAlacritty()
 	ExportTmux()
 end
 
@@ -141,7 +176,8 @@ local preview_prev = function(prompt_bufnr)
 	local selected = actions_state.get_selected_entry()
 	local cmd = "colorscheme " .. selected[1]
 	vim.cmd(cmd)
-	ExportColorsKitty()
+	-- ExportColorsKitty()
+	ExportColorsAlacritty()
 	ExportTmux()
 end
 
