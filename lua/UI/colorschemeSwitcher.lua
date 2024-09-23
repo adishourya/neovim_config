@@ -10,7 +10,7 @@ end
 -- Making a new telescope colorscheme picker with live preview hopefully
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
-local sorters = require("telescope.sorters")
+-- local sorters = require("telescope.sorters")
 local actions = require("telescope.actions")
 local actions_state = require("telescope.actions.state")
 local conf = require("telescope.config").values
@@ -126,14 +126,18 @@ function ExportTmux()
 	vim.fn.jobstart(exec_run)
 end
 
+local switcheroo = function ()
+	ExportColorsAlacritty()
+	-- ExportColorsKitty()
+	ExportTmux()
+end
+
 local escape = function(prompt_bufnr)
 	-- Reset it back to the colorscheme it was before
 	local cmd = "colorscheme " .. CURRENT_SCHEME
 	vim.cmd(cmd)
 	actions.close(prompt_bufnr)
-	-- ExportColorsKitty()
-	ExportColorsAlacritty()
-	
+	switcheroo()
 end
 
 local enter = function(prompt_bufnr)
@@ -145,20 +149,17 @@ local enter = function(prompt_bufnr)
 	local exec_run = string.format("echo 'vim.cmd[[colorscheme %s]]' > %s",selected[1],csPath)
 	vim.fn.jobstart(exec_run)
 	vim.notify("Colorscheme Change From "..CURRENT_SCHEME.." to "..selected[1])
-	-- ExportColorsKitty()
-	ExportColorsAlacritty()
+	switcheroo()
 	-- return back to normal mode
 	vim.api.nvim_input("<esc>")
 	-- Turn On if you're using TMUX.
-	ExportTmux()
+	-- ExportTmux()
 end
 
 local preview_selection = function (selected)
 	local cmd = "colorscheme " .. selected
 	vim.cmd(cmd)
-	-- ExportColorsKitty()
-	ExportColorsAlacritty()
-	ExportTmux()
+	switcheroo()
 end
 
 local preview_next = function(prompt_bufnr)
@@ -166,9 +167,7 @@ local preview_next = function(prompt_bufnr)
 	local selected = actions_state.get_selected_entry()
 	local cmd = "colorscheme " .. selected[1]
 	vim.cmd(cmd)
-	-- ExportColorsKitty()
-	ExportColorsAlacritty()
-	ExportTmux()
+	switcheroo()
 end
 
 local preview_prev = function(prompt_bufnr)
@@ -176,9 +175,7 @@ local preview_prev = function(prompt_bufnr)
 	local selected = actions_state.get_selected_entry()
 	local cmd = "colorscheme " .. selected[1]
 	vim.cmd(cmd)
-	-- ExportColorsKitty()
-	ExportColorsAlacritty()
-	ExportTmux()
+	switcheroo()
 end
 
 

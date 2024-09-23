@@ -3,6 +3,7 @@ local fmt = string.format
 
 local kind_presets = {
     default = {
+				Codeium ="🚀",
         Class = "",
         Color = "",
         Constant = "",

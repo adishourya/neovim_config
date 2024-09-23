@@ -1,1 +1,1 @@
-vim.cmd[[colorscheme wombat]]
+vim.cmd[[colorscheme ashes]]

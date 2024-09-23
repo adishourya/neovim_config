@@ -29,6 +29,7 @@ cmp.setup({
 		format = require("completion.kind").cmp_format({
 			with_text = false,
 			menu = {
+				codeium = "[Codeium]",
 				luasnip = "[Snip]",
 				nvim_lsp = "[LS]",
 				nvim_lua = "[Lua]",
@@ -70,8 +71,7 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 
-
-		["<tab>"] = cmp.mapping(function(fallback)
+		["<down>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 			elseif luasnip.expand_or_jumpable() then
@@ -82,6 +82,7 @@ cmp.setup({
 				fallback()
 			end
 		end, { "i", "s" }),
+
 
 		-- Previous in menu
 		["<c-p>"] = cmp.mapping(function(fallback)
@@ -96,7 +97,7 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 
-		["<S-tab>"] = cmp.mapping(function(fallback)
+		["<Up>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
 			elseif luasnip.choice_active() then
@@ -112,6 +113,7 @@ cmp.setup({
 		['<c-y>'] = cmp.mapping.confirm({ select = true }),
 		-- not very neovim-y but has to be done
 		['<cr>'] = cmp.mapping.confirm({ select = true }),
+		['<tab>'] = cmp.mapping.confirm({ select = true }),
 
 		-- Scroll up DOc that pops
 		["<c-f>"] = cmp.mapping(function(fallback)
@@ -138,13 +140,14 @@ cmp.setup({
 		end, { "i", "s" }),
 	},
 	sources = {
-		{name = "otter"},
+		-- {name = "otter"},
 		{ name = "luasnip", priority = 4 },
 		{ name = "path", priority = 3 },
 		{ name = "nvim_lsp", priority = 3 },
 		{ name = "nvim_lua", priority = 2 },
 		{ name = "buffer", priority = 1 },
 		{ name = "nvim_lsp_signature_help", priority = 10 },
+		{name = "codeium", priority=9},
 	},
 	experimental = { ghost_text = false },
 	sorting = {
