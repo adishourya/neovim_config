@@ -112,7 +112,7 @@ cmp.setup({
 		-- Accept the selected completion
 		['<c-y>'] = cmp.mapping.confirm({ select = true }),
 		-- not very neovim-y but has to be done
-		['<cr>'] = cmp.mapping.confirm({ select = true }),
+		-- ['<cr>'] = cmp.mapping.confirm({ select = true }),
 		['<tab>'] = cmp.mapping.confirm({ select = true }),
 
 		-- Scroll up DOc that pops

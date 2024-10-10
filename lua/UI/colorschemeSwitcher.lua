@@ -126,8 +126,101 @@ function ExportTmux()
 	vim.fn.jobstart(exec_run)
 end
 
+
+function ExportColorsI3()
+	local fn = vim.fn
+	local filename = os.getenv("HOME") .. "/.config/i3/nvim_colors.config"
+	local file = io.open(filename, "w")
+	---@diagnostic disable-next-line: param-type-mismatch
+	io.output(file)
+	io.write("# i3 colorscheme exported from Neovim\n\n")
+
+	-- Define border colors
+	local normal_fg = fn.synIDattr(fn.hlID("Normal"), "fg")
+	local normal_bg = fn.synIDattr(fn.hlID("Normal"), "bg")
+	local comment = fn.synIDattr(fn.hlID("Comment"), "fg")
+	local error = fn.synIDattr(fn.hlID("ErrorMsg"), "fg")
+	local search = fn.synIDattr(fn.hlID("Search"), "bg")
+
+	-- Write i3 border color configuration
+	io.write("set $fg " .. normal_fg .."\n")
+	io.write("set $bg " .. normal_bg .."\n")
+	io.write("set $comment " .. comment .. "\n")
+	io.write("set $error " .. error .. "\n")
+	io.write("set $statusline_bg " .. search .. "\n")
+
+	io.close(file)
+
+	-- Reload i3 to apply the new colors
+	vim.fn.jobstart("i3-msg reload")
+end
+
+
+function NewExportColorsI3()
+	local fn = vim.fn
+	local filename = os.getenv("HOME") .. "/.config/i3/nvim_colors.config"
+	local i3_config = os.getenv("HOME") .. "/.config/i3/config"  -- Path to your i3 config file
+	local file = io.open(filename, "w")
+
+	---@diagnostic disable-next-line: param-type-mismatch
+	io.output(file)
+	io.write("# i3 colorscheme exported from Neovim\n\n")
+
+	-- Define border colors
+	local normal_fg = fn.synIDattr(fn.hlID("Normal"), "fg")
+	local normal_bg = fn.synIDattr(fn.hlID("Normal"), "bg")
+	local comment = fn.synIDattr(fn.hlID("Comment"), "fg")
+	local error = fn.synIDattr(fn.hlID("ErrorMsg"), "fg")
+	local search = fn.synIDattr(fn.hlID("Search"), "bg")
+
+	-- Write i3 border color configuration to the temp file
+	io.write("set $fg " .. normal_fg .. "\n")
+	io.write("set $bg " .. normal_bg .. "\n")
+	io.write("set $comment " .. comment .. "\n")
+	io.write("set $error " .. error .. "\n")
+	io.write("set $statusline_bg " .. search .. "\n")
+
+	io.close(file)
+
+	-- Function to update i3 config using sed
+	local function updateI3Config()
+		-- Replace existing color lines with new ones
+		local sed_commands = {
+			"sed -i 's|^set \\$fg .*|set $fg " .. normal_fg .. "|' " .. i3_config,
+			"sed -i 's|^set \\$bg .*|set $bg " .. normal_bg .. "|' " .. i3_config,
+			"sed -i 's|^set \\$comment .*|set $comment " .. comment .. "|' " .. i3_config,
+			"sed -i 's|^set \\$error .*|set $error " .. error .. "|' " .. i3_config,
+			"sed -i 's|^set \\$statusline_bg .*|set $statusline_bg " .. search .. "|' " .. i3_config,
+		}
+
+		for _, command in ipairs(sed_commands) do
+			os.execute(command)
+		end
+
+		-- Append new color definitions if not found
+		local append_command = "grep -qxF 'set $fg " .. normal_fg .. "' " .. i3_config .. " || echo 'set $fg " .. normal_fg .. "' >> " .. i3_config
+		os.execute(append_command)
+		append_command = "grep -qxF 'set $bg " .. normal_bg .. "' " .. i3_config .. " || echo 'set $bg " .. normal_bg .. "' >> " .. i3_config
+		os.execute(append_command)
+		append_command = "grep -qxF 'set $comment " .. comment .. "' " .. i3_config .. " || echo 'set $comment " .. comment .. "' >> " .. i3_config
+		os.execute(append_command)
+		append_command = "grep -qxF 'set $error " .. error .. "' " .. i3_config .. " || echo 'set $error " .. error .. "' >> " .. i3_config
+		os.execute(append_command)
+		append_command = "grep -qxF 'set $statusline_bg " .. search .. "' " .. i3_config .. " || echo 'set $statusline_bg " .. search .. "' >> " .. i3_config
+		os.execute(append_command)
+	end
+
+	-- Update i3 config file
+	updateI3Config()
+
+	-- Reload i3 to apply the new colors
+	vim.fn.jobstart("i3-msg reload")
+end
+
 local switcheroo = function ()
 	ExportColorsAlacritty()
+	-- ExportColorsI3()
+	NewExportColorsI3()
 	-- ExportColorsKitty()
 	ExportTmux()
 end

@@ -55,5 +55,5 @@ vim.keymap.set('i','<C-e>','<Esc>A',{noremap=true})
 
 -- Move the current line or selected block down
 -- Move the current line or selected block up
-vim.api.nvim_set_keymap('v', '<S-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<S-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<S-s>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<S-w>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
