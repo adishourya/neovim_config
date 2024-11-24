@@ -1,1 +1,1 @@
-vim.cmd[[colorscheme chadtain]]
+vim.cmd[[colorscheme aquarium]]

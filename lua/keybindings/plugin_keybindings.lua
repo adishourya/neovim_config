@@ -9,7 +9,8 @@ vim.keymap.set('n','<Leader>cd',":cd %:p:h<CR> :lua vim.notify('changed Dir')<cr
 -- ┌───────────────┐
 -- │Put it in a box│
 -- └───────────────┘
-vim.keymap.set({'n','v'}, '<leader>cb', '<cmd>.!toilet -f term -F border <cr> ',{noremap=true})
+vim.keymap.set({'n','v'}, '<leader>cb', '<cmd>.!toilet -w 200 -f term -F border <cr> ',{noremap=true})
+
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>rf', ':Telescope oldfiles<CR>', { noremap = true })

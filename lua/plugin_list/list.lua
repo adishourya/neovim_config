@@ -10,9 +10,9 @@ local packages = {
 
 	-- UI related plugins
 	{
-	'smoka7/hop.nvim',
-	version = "*",
-	opts = { keys = 'etovxqpdygfblzhckisuran' }
+		'smoka7/hop.nvim',
+		version = "*",
+		opts = { keys = 'etovxqpdygfblzhckisuran' }
 	},
 
 	{
@@ -30,7 +30,7 @@ local packages = {
 	-- 		require("mini.statusline").setup()
 	-- 	end
 	-- },
-	--
+
 	{
 		'echasnovski/mini.animate',
 		version = false,
@@ -38,6 +38,17 @@ local packages = {
 			require("mini.animate").setup()
 		end
 	},
+	-- {
+	-- 	"karb94/neoscroll.nvim",
+	-- 	config = function()
+	-- 		require('neoscroll').setup({})
+	-- 	end
+	-- },
+	--
+	-- {
+	-- 	"sphamba/smear-cursor.nvim",
+	-- 	opts = {},
+	-- },
 
 	{
 		"windwp/nvim-autopairs",
@@ -69,13 +80,13 @@ local packages = {
 			vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>",
 				{ desc = "Toggle Outline" })
 
-		require("outline").setup ({
-			outline_window = {
-				position = "left",
+			require("outline").setup({
+				outline_window = {
+					position = "left",
 				},
-		})
-	end,
-},
+			})
+		end,
+	},
 
 	{
 		"ray-x/lsp_signature.nvim",
@@ -147,10 +158,13 @@ local packages = {
 	-- dependencies = { "nvim-tree/nvim-web-devicons" },
 	-- },
 
-	{ 'echasnovski/mini.files', version = false,
-		config = function ()
+	{
+		'echasnovski/mini.files',
+		version = false,
+		config = function()
 			require('mini.files').setup()
-		end},
+		end
+	},
 
 	-- {
 	-- 	'echasnovski/mini.indentscope',
@@ -161,10 +175,14 @@ local packages = {
 	-- },
 
 	-- { "lukas-reineke/indent-blankline.nvim",version = "2.0", opts = {}},
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {},
-		config = function ()
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+		config = function()
 			require("ibl").setup()
-		end},
+		end
+	},
 
 
 	-- Fuzzy Finder (files, lsp, etc)
@@ -229,12 +247,14 @@ local packages = {
 	},
 
 	-- sticky header
-	{"nvim-treesitter/nvim-treesitter-context",
-	config = function ()
-		require("treesitter-context").setup(
-				{max_lines = 2,}
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		config = function()
+			require("treesitter-context").setup(
+				{ max_lines = 2, }
 			)
-	end},
+		end
+	},
 
 	{
 		'rcarriga/nvim-notify',
@@ -266,10 +286,28 @@ local packages = {
 		end
 	},
 
-	{
-		"adishourya/base46",
-		priority = 1000,
-	},
+	{ "neanias/everforest-nvim",          priority = 1000 },
+	{ 'nyoom-engineering/oxocarbon.nvim', priority = 1000 },
+	{ "rebelot/kanagawa.nvim",            priority = 1000 },
+	{ "scottmckendry/cyberdream.nvim",    priority = 1000, },
+	{ "adishourya/base46",                priority = 1000, },
+
+	-- {
+	-- 	"RRethy/base16-nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require('base16-colorscheme').with_config({
+	-- 			telescope = true,
+	-- 			indentblankline = true,
+	-- 			notify = true,
+	-- 			ts_rainbow = true,
+	-- 			cmp = false,
+	-- 			illuminate = true,
+	-- 			dapui = true,
+	-- 		})
+	-- 	end
+	-- },
+
 
 	-- Configuring Notebook
 }

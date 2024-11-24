@@ -1,4 +1,3 @@
--- Your trial and error scratchpad
 local map = vim.keymap.set
 
 local ok_telescope, _ = pcall(require, "telescope")
@@ -30,8 +29,9 @@ local preinstalled = {
 	"evening", "industry", "koehler", "morning", "murphy",
 	"pablo", "peachpuff", "ron", "shine", "slate",
 	"torte", "zellner", "habamax", "lunaperche",
-	-- "default",
+	"default", "vim"
 	-- like to keep default uncommented here.. its too good since > 0.10
+	-- "sorbet"
 }
 -- remove preinstalled colorschemes from the installed list
 local array_sub = function(t1, t2)
@@ -63,7 +63,7 @@ function ExportColorsKitty()
 	io.write("background " .. bg .. "\n")
 	io.write("selection_foreground " .. bg .. "\n")
 	io.write("selection_background " .. fg .. "\n")
-	for i = 0,15 do
+	for i = 0, 15 do
 		local var = "g:terminal_color_" .. tostring(i)
 		if fn.exists(var) == 1 then
 			local tc = fn.eval(var)
@@ -77,7 +77,6 @@ function ExportColorsKitty()
 	local exec_run = string.format("kitty @ set-colors --all --configured ~/.config/kitty/nvim_export.conf")
 	vim.fn.jobstart(exec_run)
 end
-
 
 function ExportColorsAlacritty()
 	local fn = vim.fn
@@ -99,14 +98,6 @@ function ExportColorsAlacritty()
 	io.write("text = '" .. bg .. "'\n")
 	io.write("cursor = '" .. fg .. "'\n")
 	io.close(file)
-	-- 	-- Trigger Alacritty hot reload by sending SIGUSR1 to Alacritty process
-	-- local alacritty_pid = fn.system("pgrep alacritty")
-	-- if alacritty_pid ~= "" then
-	-- 	fn.system("kill -s USR1 " .. alacritty_pid)
-	-- 	print("Alacritty configuration reloaded.")
-	-- else
-	-- 	print("Alacritty process not found.")
-	-- end
 end
 
 function ExportTmux()
@@ -118,7 +109,7 @@ function ExportTmux()
 	io.output(file)
 	io.write("# Tmux colors exported from neovim" .. "\n\n")
 	io.write("# exported from " .. vim.g.colors_name .. "\n\n")
-	local color_string = string.format("set-option -g status-style bg=%s,fg=%s",statusline_bg,statusline_fg)
+	local color_string = string.format("set-option -g status-style bg=%s,fg=%s", statusline_bg, statusline_fg)
 	io.write(color_string)
 	io.close(file)
 
@@ -126,40 +117,10 @@ function ExportTmux()
 	vim.fn.jobstart(exec_run)
 end
 
-
 function ExportColorsI3()
 	local fn = vim.fn
 	local filename = os.getenv("HOME") .. "/.config/i3/nvim_colors.config"
-	local file = io.open(filename, "w")
-	---@diagnostic disable-next-line: param-type-mismatch
-	io.output(file)
-	io.write("# i3 colorscheme exported from Neovim\n\n")
-
-	-- Define border colors
-	local normal_fg = fn.synIDattr(fn.hlID("Normal"), "fg")
-	local normal_bg = fn.synIDattr(fn.hlID("Normal"), "bg")
-	local comment = fn.synIDattr(fn.hlID("Comment"), "fg")
-	local error = fn.synIDattr(fn.hlID("ErrorMsg"), "fg")
-	local search = fn.synIDattr(fn.hlID("Search"), "bg")
-
-	-- Write i3 border color configuration
-	io.write("set $fg " .. normal_fg .."\n")
-	io.write("set $bg " .. normal_bg .."\n")
-	io.write("set $comment " .. comment .. "\n")
-	io.write("set $error " .. error .. "\n")
-	io.write("set $statusline_bg " .. search .. "\n")
-
-	io.close(file)
-
-	-- Reload i3 to apply the new colors
-	vim.fn.jobstart("i3-msg reload")
-end
-
-
-function NewExportColorsI3()
-	local fn = vim.fn
-	local filename = os.getenv("HOME") .. "/.config/i3/nvim_colors.config"
-	local i3_config = os.getenv("HOME") .. "/.config/i3/config"  -- Path to your i3 config file
+	local i3_config = os.getenv("HOME") .. "/.config/i3/config" -- Path to your i3 config file
 	local file = io.open(filename, "w")
 
 	---@diagnostic disable-next-line: param-type-mismatch
@@ -172,6 +133,17 @@ function NewExportColorsI3()
 	local comment = fn.synIDattr(fn.hlID("Comment"), "fg")
 	local error = fn.synIDattr(fn.hlID("ErrorMsg"), "fg")
 	local search = fn.synIDattr(fn.hlID("Search"), "bg")
+
+	-- Check if the background is light or dark
+	local background = vim.o.background
+	-- vim.notify(background)
+
+	-- If background is light, swap the fg and bg
+	if background == "light" then
+		local temp = normal_fg
+		normal_fg = normal_bg
+		normal_bg = temp
+	end
 
 	-- Write i3 border color configuration to the temp file
 	io.write("set $fg " .. normal_fg .. "\n")
@@ -184,29 +156,26 @@ function NewExportColorsI3()
 
 	-- Function to update i3 config using sed
 	local function updateI3Config()
-		-- Replace existing color lines with new ones
-		local sed_commands = {
-			"sed -i 's|^set \\$fg .*|set $fg " .. normal_fg .. "|' " .. i3_config,
-			"sed -i 's|^set \\$bg .*|set $bg " .. normal_bg .. "|' " .. i3_config,
-			"sed -i 's|^set \\$comment .*|set $comment " .. comment .. "|' " .. i3_config,
-			"sed -i 's|^set \\$error .*|set $error " .. error .. "|' " .. i3_config,
-			"sed -i 's|^set \\$statusline_bg .*|set $statusline_bg " .. search .. "|' " .. i3_config,
-		}
+		-- Combined sed command for all replacements
+		local sed_command = "sed -i -e '/^set \\$fg /s|^.*|set $fg " .. normal_fg .. "|' " ..
+				"-e '/^set \\$bg /s|^.*|set $bg " .. normal_bg .. "|' " ..
+				"-e '/^set \\$comment /s|^.*|set $comment " .. comment .. "|' " ..
+				"-e '/^set \\$error /s|^.*|set $error " .. error .. "|' " ..
+				"-e '/^set \\$statusline_bg /s|^.*|set $statusline_bg " .. search .. "|' " ..
+				i3_config
 
-		for _, command in ipairs(sed_commands) do
-			os.execute(command)
-		end
+		-- Combined append command for all missing variables
+		local append_command = "grep -q -F 'set $fg " .. normal_fg .. "' " .. i3_config ..
+				" && grep -q -F 'set $bg " .. normal_bg .. "' " .. i3_config ..
+				" && grep -q -F 'set $comment " .. comment .. "' " .. i3_config ..
+				" && grep -q -F 'set $error " .. error .. "' " .. i3_config ..
+				" && grep -q -F 'set $statusline_bg " .. search .. "' " .. i3_config ..
+				" || echo -e 'set $fg " .. normal_fg .. "\\nset $bg " .. normal_bg ..
+				"\\nset $comment " .. comment .. "\\nset $error " .. error ..
+				"\\nset $statusline_bg " .. search .. "' >> " .. i3_config
 
-		-- Append new color definitions if not found
-		local append_command = "grep -qxF 'set $fg " .. normal_fg .. "' " .. i3_config .. " || echo 'set $fg " .. normal_fg .. "' >> " .. i3_config
-		os.execute(append_command)
-		append_command = "grep -qxF 'set $bg " .. normal_bg .. "' " .. i3_config .. " || echo 'set $bg " .. normal_bg .. "' >> " .. i3_config
-		os.execute(append_command)
-		append_command = "grep -qxF 'set $comment " .. comment .. "' " .. i3_config .. " || echo 'set $comment " .. comment .. "' >> " .. i3_config
-		os.execute(append_command)
-		append_command = "grep -qxF 'set $error " .. error .. "' " .. i3_config .. " || echo 'set $error " .. error .. "' >> " .. i3_config
-		os.execute(append_command)
-		append_command = "grep -qxF 'set $statusline_bg " .. search .. "' " .. i3_config .. " || echo 'set $statusline_bg " .. search .. "' >> " .. i3_config
+		-- Execute the sed and append commands
+		os.execute(sed_command)
 		os.execute(append_command)
 	end
 
@@ -217,12 +186,104 @@ function NewExportColorsI3()
 	vim.fn.jobstart("i3-msg reload")
 end
 
-local switcheroo = function ()
+function River()
+	-- Define border colors
+	local normal_fg     = vim.fn.synIDattr(vim.fn.hlID("Normal"), "fg")
+	local normal_bg     = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
+	local comment       = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg")
+	local error         = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
+	local search        = vim.fn.synIDattr(vim.fn.hlID("Search"), "bg")
+	local statusline_fg = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "fg")
+	local statusline_bg = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "bg")
+
+	-- Convert colors to 0x format
+	local normal_bg_hex = "0x" .. normal_bg:sub(2) -- Removing '#' and adding '0x'
+	local search_hex    = "0x" .. search:sub(2)
+	local comment_hex   = "0x" .. comment:sub(2)
+	local error_hex     = "0x" .. error:sub(2)
+	local statusline_fg = "0x" .. statusline_fg:sub(2)
+
+	-- Concatenate commands
+	-- local command       = string.format(
+	-- 	"riverctl background-color '%s' && riverctl border-color-focused '%s' && riverctl border-color-unfocused '%s'",
+	-- 	normal_bg_hex, search_hex, comment_hex)
+
+	local command       = string.format(
+		"riverctl border-color-focused '%s' && riverctl border-color-unfocused '%s'",
+		search_hex, comment_hex)
+
+	local write_command =  string.format("echo '%s' > %s",command, "~/.config/river/borders.sh")
+	-- vim.notify(write_command)
+
+	-- Execute the command
+	os.execute(command)
+	os.execute(write_command)
+end
+
+
+function i3Bar()
+	-- Define border colors
+	local normal_fg     = vim.fn.synIDattr(vim.fn.hlID("Normal"), "fg")
+	local normal_bg     = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg")
+	local comment       = vim.fn.synIDattr(vim.fn.hlID("Comment"), "fg")
+	local error         = vim.fn.synIDattr(vim.fn.hlID("ErrorMsg"), "fg")
+	local search        = vim.fn.synIDattr(vim.fn.hlID("Search"), "bg")
+	local statusline_fg = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "fg")
+	local statusline_bg = vim.fn.synIDattr(vim.fn.hlID("StatusLine"), "bg")
+
+	local bar = os.getenv("HOME") .. "/.config/i3bar-river/config.toml" -- Path to your i3 config file
+	local file = io.open(bar, "r+")
+	if file == nil then
+		print("Unable to open i3Bar config")
+		return
+	end
+
+	-- Read file content and modify it
+	local content = file:read("*a")
+	-- vim.notify(content)
+	file:close()
+
+	-- Find and replace tag_focused_bg value with the search color
+	local updated_content = content:gsub("tag_focused_bg%s*=%s*\"#%x%x%x%x%x%x\"", "tag_focused_bg = \"" .. search .. "\"")
+
+	-- background
+	local updated_content = updated_content:gsub("background%s*=%s*\"#%x%x%x%x%x%x\"", "background = \"" .. statusline_bg .. "\"")
+	local updated_content = updated_content:gsub("tag_bg%s*=%s*\"#%x%x%x%x%x%x\"", "tag_bg = \"" .. statusline_bg .. "\"")
+	local updated_content = updated_content:gsub("tag_inactive_bg%s*=%s*\"#%x%x%x%x%x%x\"", "tag_inactive_bg = \"" .. statusline_bg .. "\"")
+
+	-- foreground
+	local updated_content = updated_content:gsub("color%s*=%s*\"#%x%x%x%x%x%x\"", "color = \"" .. statusline_fg .. "\"")
+	local updated_content = updated_content:gsub("tag_fg%s*=%s*\"#%x%x%x%x%x%x\"", "tag_fg = \"" .. statusline_fg .. "\"")
+	local updated_content = updated_content:gsub("tag_inactive_fg%s*=%s*\"#%x%x%x%x%x%x\"", "tag_inactive_fg = \"" .. statusline_fg .. "\"")
+	local updated_content = updated_content:gsub("tag_active_fg%s*=%s*\"#%x%x%x%x%x%x\"", "tag_active_fg = \"" .. statusline_bg .. "\"")
+
+	-- Write the updated content back to the file
+	file = io.open(bar, "w")
+	file:write(updated_content)
+	file:close()
+
+	-- Define the sed command (if necessary) to be run on the file
+	-- local sed_command = "sed -i 's/tag_focused_bg = \"#%x%x%x%x%x%x\"/tag_focused_bg = \"" .. search .. "\"/' " .. bar
+	-- os.execute(sed_command)
+
+	-- Reload i3 bar by killing and restarting it using vim.fn.jobstart
+	local reload_command = "killall -q i3bar-river && i3bar-river" -- Adjust to your bar process name
+
+	vim.fn.jobstart(reload_command,{detach = true})
+
+end
+
+local switcheroo = function()
 	ExportColorsAlacritty()
+	River()
+	i3Bar()
 	-- ExportColorsI3()
-	NewExportColorsI3()
 	-- ExportColorsKitty()
 	ExportTmux()
+end
+
+local enter_switcheroo = function()
+  River()
 end
 
 local escape = function(prompt_bufnr)
@@ -239,9 +300,9 @@ local enter = function(prompt_bufnr)
 	vim.cmd(cmd)
 	actions.close(prompt_bufnr)
 	local csPath = vim.fn.expand("~/.config/nvim/lua/UI/set_scheme.lua")
-	local exec_run = string.format("echo 'vim.cmd[[colorscheme %s]]' > %s",selected[1],csPath)
+	local exec_run = string.format("echo 'vim.cmd[[colorscheme %s]]' > %s", selected[1], csPath)
 	vim.fn.jobstart(exec_run)
-	vim.notify("Colorscheme Change From "..CURRENT_SCHEME.." to "..selected[1])
+	vim.notify("Colorscheme Change From " .. CURRENT_SCHEME .. " to " .. selected[1])
 	switcheroo()
 	-- return back to normal mode
 	vim.api.nvim_input("<esc>")
@@ -249,7 +310,7 @@ local enter = function(prompt_bufnr)
 	-- ExportTmux()
 end
 
-local preview_selection = function (selected)
+local preview_selection = function(selected)
 	local cmd = "colorscheme " .. selected
 	vim.cmd(cmd)
 	switcheroo()
@@ -273,7 +334,7 @@ end
 
 
 local switcherOpts = {
-	finder = finders.new_table{results=downloaded},
+	finder = finders.new_table { results = downloaded },
 	-- sorter = sorters.get_generic_fuzzy_sorter({}),
 	sorter = conf.generic_sorter(),
 	sorting_stratergy = "ascending",
@@ -281,10 +342,10 @@ local switcherOpts = {
 	attach_mappings = function(prompt_bufnr, map)
 		-- change on TextChangedI
 		vim.schedule(function()
-			vim.api.nvim_create_autocmd("TextChangedI",{
+			vim.api.nvim_create_autocmd("TextChangedI", {
 				buffer = prompt_bufnr,
 				callback = function()
-				preview_selection(actions_state.get_selected_entry()[1])
+					preview_selection(actions_state.get_selected_entry()[1])
 				end
 			})
 		end)
@@ -300,8 +361,8 @@ local switcherOpts = {
 
 local change_scheme = function()
 	CURRENT_SCHEME = vim.g.colors_name
-	colors = pickers.new(switcher_appearance,switcherOpts)
+	colors = pickers.new(switcher_appearance, switcherOpts)
 	colors:find()
 end
 vim.api.nvim_create_user_command("Newcolorscheme", change_scheme, {})
-map('n',"<leader>cs",":Newcolorscheme<cr>",{noremap=true})
+map('n', "<leader>cs", ":Newcolorscheme<cr>", { noremap = true })
