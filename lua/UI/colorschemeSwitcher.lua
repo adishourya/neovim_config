@@ -204,14 +204,14 @@ function River()
 	local statusline_fg = "0x" .. statusline_fg:sub(2)
 
 	-- Concatenate commands
-	-- local command       = string.format(
-	-- 	"riverctl background-color '%s' && riverctl border-color-focused '%s' && riverctl border-color-unfocused '%s'",
-	-- 	normal_bg_hex, search_hex, comment_hex)
-
 	local command       = string.format(
-		"riverctl border-color-focused '%s' && riverctl border-color-unfocused '%s'",
-		search_hex, comment_hex)
+		"riverctl background-color '%s' && riverctl border-color-focused '%s' && riverctl border-color-unfocused '%s'",
+		normal_bg_hex, search_hex, comment_hex)
 
+	-- local command       = string.format(
+	-- 	"riverctl border-color-focused '%s' && riverctl border-color-unfocused '%s'",
+	-- 	search_hex, comment_hex)
+	--
 	local write_command =  string.format("echo '%s' > %s",command, "~/.config/river/borders.sh")
 	-- vim.notify(write_command)
 

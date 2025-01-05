@@ -17,6 +17,7 @@ vim.keymap.set('n', '<leader>rf', ':Telescope oldfiles<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>fw', ':Telescope live_grep<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>b', ':Telescope buffers<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>km', ':Telescope keymaps <CR>', { noremap = true })
+vim.keymap.set('n', '<leader>r', ':Telescope registers <CR>', { noremap = true })
 
 -- Change word
 vim.keymap.set('n', '\\rn', ':%s/\\<<C-r><C-w>\\>//g<Left><Left>', { noremap = true })
